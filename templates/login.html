@@ -1,0 +1,66 @@
+{% extends 'master/master.html' %}
+{% block 'title' %} Login {% endblock %}
+
+{% block 'body' %}
+<!-- Jumbotron -->
+<div class="card card-image" id="parallax1" style="background-image: url(../media/bg1.jpg);">
+  <div class="text-white rgba-stylish-strong py-5 px-4">
+    <div class="py-5">
+
+      <!-- Content -->
+
+      <h2 class="card-title h2 my-2 py-2 animated slideInRight slow" style="font-weight:bold;font-family:Times New Roman;font-size:30px;color:brown;"><span style="background-color:white">Login</span></h2>
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->
+<div class="container-fluid rgba-yellow-light" style="padding-top:30px;padding-bottom:30px">
+<div class="container my-5 py-5 z-depth-1 white">
+
+    {% include 'widget/message.html' %}
+    <!--Section: Content-->
+    <section class="px-md-1 mx-md-1 text-center text-lg-left dark-grey-text" >
+
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center">
+
+        <!--Grid column-->
+        <div class="col-md-6">
+
+          <!-- Default form register -->
+          <form class="text-center" action="{% url 'signin' %}" method="POST">
+            {% csrf_token %}
+            <p class="h4 mb-4">Login</p>
+
+            <!-- Username -->
+              <input type="text" name="username" id="Username" class="form-control mb-4" placeholder="Username">
+
+            <!-- Password -->
+            <input type="password" name="pass" id="defaultRegisterFormPassword" class="form-control" placeholder="Password"
+              aria-describedby="defaultRegisterFormPasswordHelpBlock">
+
+
+
+
+            <!-- Sign up button -->
+            <button class="btn btn-info my-4 peach-gradient" type="submit" style="color:brown;font-weight:bold;border-radius:10px">Login</button>
+
+
+          </form>
+          <!-- Default form register -->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+  </div>
+</div>
+{% endblock %}

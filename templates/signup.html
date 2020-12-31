@@ -1,0 +1,58 @@
+{% extends 'master/master.html' %}
+{% block 'title' %} Signup {% endblock %}
+
+{% block 'body' %}
+<!-- Jumbotron -->
+<div class="card card-image" id="parallax1" style="background-image: url(../media/bg1.jpg);">
+  <div class="text-white rgba-stylish-strong py-5 px-4">
+    <div class="py-5">
+
+      <!-- Content -->
+
+      <h2 class="card-title h2 my-2 py-2 animated slideInRight slow" style="font-weight:bold;font-family:Times New Roman;font-size:30px;color:brown;"><span style="background-color:white">Sign up</span></h2>
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->
+<div class="container-fluid rgba-yellow-light" style="padding-top:30px;padding-bottom:30px">
+<div class="container my-5 py-5 z-depth-1 white">
+{% include 'widget/message.html' %}
+
+    <!--Section: Content-->
+    <section class="px-md-1 mx-md-1 text-center text-lg-left dark-grey-text">
+
+
+      <!--Grid row-->
+      <div class="row d-flex justify-content-center">
+
+        <!--Grid column-->
+        <div class="col-md-6">
+
+          <!-- Default form register -->
+          <form class="text-center" action="{% url 'signup' %}" method="POST">
+            {% csrf_token %}
+          <p class="h4 mb-4">Sign up</p>
+            {{form}}
+
+
+            <!-- Sign up button -->
+            <button class="btn btn-info my-4 peach-gradient" type="submit" style="color:brown;font-weight:bold;border-radius:10px">Sign up</button>
+
+
+          </form>
+          <!-- Default form register -->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+
+    </section>
+    <!--Section: Content-->
+
+
+  </div>
+</div>
+{% endblock %}

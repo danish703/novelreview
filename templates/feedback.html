@@ -1,0 +1,34 @@
+{% extends 'master/master.html' %}
+{% block 'title' %} Feedback {% endblock %}
+
+{% block 'body' %}
+<!-- Jumbotron -->
+<div class="card card-image" id="parallax1" style="background-image: url(../media/bg1.jpg);">
+  <div class="text-white rgba-stylish-strong py-5 px-4">
+    <div class="py-5">
+
+      <!-- Content -->
+
+      <h2 class="card-title h2 my-2 py-2 animated slideInRight slow" style="font-weight:bold;font-family:Times New Roman;font-size:30px;color:brown;"><span style="background-color:white">Send Feedback</span></h2>
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->
+<center>
+<div class="container-fluid rgba-yellow-light" style="padding:100px 0px;">
+    <div class="container z-depth-1 white" style="padding:0px 30px">
+    <h3 style="text-align:center;padding-top:50px;color:brown;font-weight:bold;font-family:Times New Roman" class="mt-4">Send Feedback</h3><br>
+    <div class="row">
+            {% include 'widget/message.html' %}
+        <div class="col-md-12">
+            <form method="POST" action="{% url 'feedback' %}" style="color:grey;font-weight:bold">
+                {% csrf_token %}
+                {{form}}
+                <hr>
+                <center><button type="submit" class="btn peach-gradient" style="color:brown;font-weight:bold">Send</button></center><br><br>
+            </form>
+        </div>
+
+    </div>
+</div></div></center>
+{% endblock %}

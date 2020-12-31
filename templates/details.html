@@ -1,0 +1,80 @@
+{% extends 'master/master.html' %}
+
+{% block 'title' %} {{novel.name}} {% endblock %}
+
+{% block 'body' %}
+
+<div class="container-fluid" style="padding-bottom:100px;padding-top:100px">
+    <div class="row">
+        <div class="col-md-3">
+           <center><img src="{{MEDIA_URL}}{{novel.image.url}}" style="max-height:300px;width:auto;border:3px solid brown;box-shadow:5px 5px 5px brown"></center> <br>
+        </div>
+        <div class="col-md-9" style="padding-top:15px;padding-right:50px;text-align:justify">
+            <h3 style="color:brown;font-weight:bold">{{novel.name}}</h3><hr>
+            <p style="color:grey;font-weight:bold">Author Name: {{novel.author}}</p>
+            <p style="color:grey;font-weight:bold">Released Year: {{novel.release_year}}</p>
+            <p style="color:grey;font-weight:bold">Genre: {{novel.category}}</p>
+            <p style="color:grey;font-weight:bold">Description:<br>
+        {{novel.description}}
+            </p>
+        </div>
+
+    </div>
+</div>
+
+<div class="container" style="padding-bottom:50px">
+    <h3 style="border-bottom:1px solid black;color:brown;font-weight:bold">Comments</h3>
+    <div style="padding-left:2%;padding-top:40px">
+        {% if comments %}
+            {% for c in comments %}
+
+            <div class="media" style="display:block">
+                <div class="media-body">
+                    <h5 class="mt-0 font-weight-bold">{{c.user}}</h5>
+                       {% if c.status == 'positive' %}
+                        <span class="badge bg-success">{{c.status}}</span>
+                       {% else %}
+                         <span class="badge bg-danger">{{c.status}}</span>
+                        {% endif  %}
+                    <div class="row" style="padding-left:50px;color:grey;font-weight:bold">
+
+                        {{c.comment_message}}
+                    </div>
+                    <div class="row" style="padding-left:50px;color:grey;font-weight:bold">
+                        Rate: {{c.rating}}
+                    </div><br>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <div class="row">
+            <p style="color:grey;font-weight:bold">No comments yet.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        {% include 'widget/message.html' %}
+    </div>
+</div>
+<div class="container" style="padding-bottom:100px">
+    <div class="row">
+        {% if request.user.is_authenticated %}
+        <div class="col-sm-6">
+            <form method="POST" action="#" style="color:grey;font-weight:bold">
+                {% csrf_token %}
+                {{commentform}}
+                <hr>
+                <button type="submit" class="btn peach-gradient" style="color:brown;font-weight:bold">Save</button>
+            </form>
+        </div>
+        {% else %}
+        <div class="col-sm-12"><center>
+            <a href="{% url 'signin' %}" class="btn peach-gradient" style="color:brown;font-weight:bold;border-radius:10px">Login for review and rate</a></center>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

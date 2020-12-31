@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block 'title' %} {% endblock %}</title>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+  <!-- Google Fonts Roboto -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="{% static 'mdb/css/bootstrap.min.css' %}">
+  <!-- Material Design Bootstrap -->
+  <link rel="stylesheet" href="{% static 'mdb/css/mdb.min.css' %}">
+  <!-- Custom styles -->
+    <link rel="stylesheet" href="{% static 'mdb/css/style.css' %}">
+
+  <style>
+button{
+  cursor:pointer;
+}
+.chip-group{
+  display:flex;
+  flex-wrap:wrap;
+}
+.chip.chip-checkbox > .chip-add-icon::after {
+  content:"add"
+}
+.chip.chip-checkbox.active > .chip-add-icon::after {
+  content:"done"
+}
+.chip > * {
+  margin-right:2px;
+  margin-left:2px;
+  color: #757373;
+}
+.chip input {
+  display: none;
+}
+.chip.chip-checkbox,
+.chip.chip-toggle,
+.chip.clickable{
+  cursor: pointer;
+}
+.chip.active {
+  background-color: #d3d2d2;
+  border-color:#c3c2c2;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12)
+}
+.chip:hover, .chip:focus {
+  background-color: #e3e2e2;
+}
+.chip:active:focus{
+  background-color: #d3d2d2;
+}
+.chip button{
+  border:none;
+  margin-top:0;
+  margin-bottom:0;
+  padding:0;
+  background:none;
+  display:inline-flex;
+}
+.chip {
+  transition: all 0.3s ease-in-out;
+  background-color: #fff;
+  border-radius: 30px;
+  border: 1px solid #d3d2d2;
+  display: inline-flex;
+  align-items:center;
+  padding: 4px 6px 4px 6px;
+  margin-right:6px;
+  margin-bottom:6px;
+}
+.chip i.material-icons {
+  font-size: 18px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+ #parallax1 {
+        /* The image used */
+        background-image: url("../media/bg1.jpg");
+        /* Set a specific height */
+
+        max-width: 100%;
+        height: auto;
+        /* Create the parallax scrolling effect */
+        background-attachment: fixed;
+        background-position: center;
+        }
+        @media (max-width:600px){
+            #none{
+          display:none;
+            }
+        }
+        /* Paste this css to your style sheet file or under head tag */
+        /* This only works with JavaScript,
+        if it's not present, don't show loader */
+        .no-js #loader { display: none;  }
+        .js #loader { display: block; position: absolute; left: 100px; top: 0; }
+        .se-pre-con {
+          position: fixed;
+          left: 0px;
+          top: 0px;
+          width: 100%;
+          height: 100%;
+          z-index: 9999;
+          background: url(../../static/simple-pre-loader/images/loader-128x/Preloader_3.gif) center no-repeat #fff;
+        }
+
+ .actives:hover .this {
+    display: block;
+ }
+
+
+</style>
+
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.js"></script>
+  <script>
+      $(window).load(function () {
+          // Animate loader off screen
+          $(".se-pre-con").fadeOut("slow");;
+      });
+</script>
+<div class="se-pre-con"></div>
+<div class="container-fluid rgba-yellow-light">
+<div class="row">
+<div class="col-sm-2">
+  {% if request.user.is_authenticated %}
+<a style="text-align:right;color:brown;font-size:16px;font-weight:bold;font-family:Times New Roman">Welcome {{request.user}}</a>
+  {% endif %}
+</div>
+  <div class="col-sm-10">
+    <p style="text-align:right;color:brown;font-size:16px;font-weight:bold;font-family:Times New Roman">
+      {% if request.user.is_authenticated %}
+      <!--button class="dropdown" style="float:right">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" style="color:brown;">Services</a>
+        <div class="dropdown-menu dropdown-primary this" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#" style="color:brown;">{{request.user}}</a>
+          <a class="dropdown-item" href="{% url 'changepassword' %}" style="color:brown;">Change Password</a>
+          <a class="dropdown-item" href="{% url 'signout' %}" style="color:brown;">Logout</a>
+
+        </div>
+      </button-->
+      <a href="{% url 'signout' %}" style="color:brown;">Logout</a> | <a href="{% url 'dashboard' %}" style="color:brown;">Dashboard</a> | <a href="{% url 'changepassword' %}" style="color:brown;">Change Password</a>
+      {% else %}
+        <a href="{% url 'signin' %}" style="color:brown;">Login</a> | <a href="{% url 'signup' %} "  style="color:brown;">Signup</a>
+      {% endif %}
+    </p>
+  </div>
+</div>
+  </div>
+<!--Navbar-->
+<nav class="navbar sticky-top navbar-expand-lg navbar-dark peach-gradient" style="font-size:18px;font-weight:bold;font-family:Times New Roman">
+
+  <!-- Navbar brand -->
+  <a class="navbar-brand" href="{% url 'home' %}"><img src="../../media/logo.PNG" style="height:80px;max-width:100%"></a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" style="color:brown;" href="{% url 'home' %}">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" style="color:brown;" href="{% url 'about' %}">About</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown actives">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false" style="color:brown;">Services</a>
+        <div class="dropdown-menu dropdown-primary this" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'instruction' %}" style="color:brown;">Instructions</a>
+          <a class="dropdown-item" href="{% url 'feedback' %}" style="color:brown;">Send Feedback</a>
+
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+
+    <!-- Search form -->
+<form class="form-inline active-pink-3 active-pink-4">
+  <i class="fas fa-search" aria-hidden="true"></i>
+  <input class="form-control form-control-sm ml-3 w-75" method="GET" action="{% url 'home' %}" type="text" placeholder="Search a novel" aria-label="Search" name="title">
+</form>
+  </div>
+  <!-- Collapsible content -->
+
+</nav>
+<!--/.Navbar-->
+
+
+<body>
+
+
+{% block 'body' %}
+
+{% endblock %}
+<section>
+    <div style="background-image:url(../../media/bg1.jpg);">
+      <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+      <center><h3 style="font-size:25px;font-weight:bold;font-family:Times New Roman;color:brown"><span style="background-color:white">GeNovel: Genuine Novel Review</span></h3>
+              <br>  <img src="../../media/logo.PNG"  style="border:2px solid brown;box-shadow:5px 5px 5px brown;height:auto;max-width:100%" /></center>
+            </div>
+    </div>
+        </section>
+<!-- Footer -->
+<footer class="page-footer font-small peach-gradient pt-4" >
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left">
+
+    <!-- Grid row -->
+    <div class="row">
+
+      <!-- Grid column -->
+      <div class="col-md-2 mt-md-0 mt-3 text-center">
+
+      </div>
+       <!-- Grid column -->
+      <div class="col-md-5 mt-md-0 mt-3 text-center">
+
+        <!-- Content -->
+        <h4 class="text-uppercase" style="text-align:center;color:black;font-weight:bold;font-family:Times New Roman">GeNovel</h4><hr>
+        <p style="text-align:center;color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">A genuine novel review web application. Login to post your review and see the reviews and ratings of your desired novels.</p>
+
+      </div>
+
+      <!-- Grid column -->
+      <div class="col-md-5 mb-md-0 mb-3 text-center">
+
+        <!-- Links -->
+        <h4 class="text-uppercase" style="text-align:center;color:black;font-weight:bold;font-family:Times New Roman">Links</h4>
+
+        <ul class="list-unstyled">
+          <li>
+            <a href="{% url 'home' %}" style="text-align:center;color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">Home</a>
+          </li>
+          <li>
+            <a href="{% url 'about' %}" style="text-align:center;color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">About</a>
+          </li>
+          <li>
+            <a href="{% url 'instruction' %}" style="text-align:center;color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">Instruction</a>
+          </li>
+          <li>
+            <a href="{% url 'feedback' %}" style="text-align:center;color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">Feedback</a>
+          </li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+    <!-- Grid row --><hr>
+    <div class="row">
+      <div class="col-sm-6">
+        {% if request.user.is_authenticated %}
+          <center><p style="color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">Logout from account: <a href="{% url 'signout' %}" class="btn btn-sm white" style="font-size:15px;color:brown;font-weight:bold;font-family:Times New Roman;border-radius:10px">Logout</a></p> </center>
+        {% else %}
+       <center><p style="color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">Login with your account: <a href="{% url 'signin' %}" class="btn btn-sm white" style="font-size:15px;color:brown;font-weight:bold;font-family:Times New Roman;border-radius:10px">Login</a></p> </center>
+        {% endif %}
+      </div>
+      <div class="col-sm-6">
+        {% if request.user.is_authenticated %}
+          <center><p style="color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">Change your password: <a href="{% url 'changepassword' %}" class="btn btn-sm white" style="font-size:15px;color:brown;font-weight:bold;font-family:Times New Roman;border-radius:10px">Change Password</a></p> </center>
+        {% else %}
+       <center><p style="color:brown;font-weight:bold;font-family:Times New Roman;font-size:18px">Sign up a new account: <a href="{% url 'signup' %}" class="btn btn-sm white" style="font-size:15px;color:brown;font-weight:bold;font-family:Times New Roman;border-radius:10px">Sign up</a></p> </center>
+        {% endif %}
+      </div>
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+  <!-- Copyright -->
+  <div class="footer-copyright text-center py-3">© 2020 Copyright:
+    <a href="https://mdbootstrap.com/"> genuinenovel.com</a>
+  </div>
+  <!-- Copyright -->
+
+</footer>
+<!-- Footer -->
+<!-- jQuery -->
+  <script type="text/javascript" src="{% static 'mdb/js/jquery.min.js' %}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'mdb/js/popper.min.js' %}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'mdb/js/bootstrap.min.js' %}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'mdb/js/mdb.min.js' %}"></script>
+<script>
+  $(document).on("keyup", ".chip.chip-checkbox, .chip.toggle, .chip.clickable", function(e){
+  if(e.which==13 || e.which == 32)
+     this.click();
+});
+$(document).on("click", ".chip button", function(e){
+  e.stopPropagation();
+});
+$(document).on("click", ".chip.chip-checkbox", function(){
+  let $this = $(this);
+  let $option = $this.find("input");
+  if($option.is(":radio")){
+    let $others = $("input[name=" + $option.attr("name") + "]").not($option);
+    $others.prop("checked", false);
+    $others.change();
+  }
+  $option.prop("checked", !$this.hasClass("active"));
+  $option.change();
+});
+$(document).on("click", ".chip.toggle", function(){
+  $(this).toggleClass("active");
+});
+$(document).on("change", ".chip.chip-checkbox input", function(){
+  let $chip = $(this).parent(".chip");
+  $chip.toggleClass("active",this.checked);
+  $chip.attr("aria-checked", this.checked ? "true" : "false");
+});
+
+$("#addFilterBtn").click(function(){
+      let $txt = $("#addFilterTxt");
+      let filter = $txt.val();
+      $txt.val('');
+      $(`
+          <div class = "chip" tabindex = "-1">
+            <span>
+              ${ filter }
+            </span>
+            <button title="Remove chip" aria-label="Remove chip" type = "button" onclick = "$(this).parent().remove()">
+              <i class = "material-icons">cancel</i>
+            </button>
+          </div>`).appendTo("#filterChipsContainer");;
+});
+</script>
+</body>
+</html>

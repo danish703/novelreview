@@ -1,0 +1,21 @@
+{% extends 'master/master.html' %}
+{% block 'title' %} Welcome {{request.user}} {% endblock %}
+
+{% block 'body' %}
+<!-- Jumbotron -->
+<div class="card card-image" id="parallax1" style="background-image: url(../media/bg1.jpg);">
+  <div class="text-white rgba-stylish-strong py-5 px-4">
+    <div class="py-5">
+
+      <!-- Content -->
+
+      <h2 class="card-title h2 my-2 py-2 animated slideInRight slow" style="font-weight:bold;font-family:Times New Roman;font-size:30px;color:brown;"><span style="background-color:white">Dashboard</span></h2>
+    </div>
+  </div>
+</div>
+<!-- Jumbotron -->
+<div class="container" style="padding:50px 0px">
+<h2 style="color:brown;font-weight:bold;font-family:Times New Roman;font-size:20px;text-align:center">Welcome {{request.user}}, you can now comment on your desired novel. </h2>
+<br><br><center><img src="../../media/novel.jpg" style="height:300px;max-width:100%"></center><br><br>
+</div>
+{% endblock %}

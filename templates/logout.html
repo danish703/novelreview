@@ -1,0 +1,11 @@
+{% extends 'master/master.html' %}
+{% block 'title' %} Logout {% endblock %}
+
+{% block 'body' %}
+<div class="container" style="text-align:center;padding-top:50px;color:brown;font-weight:bold;font-family:Times New Roman">
+   <br> <h5>Logged out</h5><br>
+<h2>Thanks for spending some quality time with our Web site today.</h2><br>
+
+<p>Log in again: <a href="{% url 'signin' %}" class="btn btn-sm peach-gradient" style="font-size:15px;color:brown;font-weight:bold;font-family:Times New Roman;border-radius:10px">Login</a></p><br>
+</div>
+{% endblock %}

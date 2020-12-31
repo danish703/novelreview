@@ -1,0 +1,226 @@
+{% extends 'master/master.html' %}
+
+{% block 'title' %} GeNovel {% endblock %}
+
+
+
+{% block 'body' %}
+
+<!-- Jumbotron -->
+<div class="card card-image" id="parallax1" style="background-image: url(../media/bg1.jpg);">
+  <div class="text-white text-center rgba-stylish-strong py-5 px-4">
+    <div class="py-5">
+
+      <!-- Content -->
+
+      <h2 class="card-title h2 my-4 py-2 animated slideInDown slow" style="text-align:center;font-weight:bold;font-family:Times New Roman;font-size:30px;color:brown;"><span style="background-color:white">Welcome to GeNovel</span></h2>
+      <p class="mb-4 pb-2 px-md-5 mx-md-5 animated slideInDown slow" style="text-align:center;font-weight:bold;font-family:Times New Roman;font-size:18px;"><span style="text-decoration:underline">Genuine Novel Review Web Application, a great eye for good books.</span>  <br><br>Using the text analysis feature from opinion mining technique, your reviews will automatically be polarized as positive, negative or neutral sentiment value or score. If you want to read best novels as per the genuine reviews of people, you are using the right novel review application.</p>
+      <!-- Button -->
+    <center><a href="{% url 'about' %}" class="btn peach-gradient animated slideInDown slow" style="border-radius:10px;color:brown;font-weight:bold;font-family:Times New Roman">Know More</a></center>
+    </div>
+  </div>
+</div>
+
+<!-- Jumbotron -->
+<center><div class="container" style="padding-top:80px;padding-bottom:80px">
+<fieldset>
+    <legend style="color:brown;font-weight:bold;font-family:Times New Roman">
+      Genres:
+    </legend>
+      {% for n in category %}
+      <div class="chip chip-checkbox" aria-labelledby="radioTwoLabel" tabindex="0" role="radio" aria-checked="false">
+        <input type="radio" name="radioEx" />
+        <span id="radioTwoLabel" style="color:dark-grey;font-weight:bold;font-family:Times New Roman"><a href="{% url 'genreNovelList' n.id %}">{{n.title}}</a></span>
+      </div>
+      {% endfor %}
+
+
+  </fieldset>
+</div></center>
+
+<div class="container-fluid rgba-yellow-light" style="padding-top:50px;padding-bottom:100px">
+
+
+      <div class="container">
+    <h3 style="text-align:center;padding-top:50px;color:brown;font-weight:bold;font-family:Times New Roman" class="mt-4">All Novels</h3><br>
+    <div class="row">
+        {% for n in novels %}
+        <div class="col-sm-4" style="padding-bottom:100px">
+
+    <!-- Card -->
+<div class="card">
+
+  <!-- Card image -->
+  <div class="view overlay">
+      <br>
+    <center><img class="card-img-top" src="{{MEDIA_URL}}{{n.image.url}}"
+      alt="Card image cap" style="height:250px;width:auto;border:3px solid brown;box-shadow:5px 5px 5px brown"></center>
+    <a href="{% url 'details' n.id %}">
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+
+  <!-- Card content -->
+  <div class="card-body">
+
+    <!-- Title -->
+    <h5 class="card-title" style="color:brown;font-weight:bold">{{n.name}}</h5>
+    <p class="card-title" style="color:dark-grey;font-weight:bold">Genre: {{n.category}}</p>
+
+    <p>
+      {% if n.averageRate == 0 %}
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate < 1 and n.averageRate > 0 %}
+      <i class="fas fa-star-half-alt"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate == 1 %}
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate < 2 and n.averageRate > 1 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate == 2 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate < 3 and n.averageRate > 2 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate == 3 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate < 4 and n.averageRate > 3 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate == 4 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      {% elif n.averageRate < 5 and n.averageRate > 4 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star-half-alt"></i>
+      {% elif n.averageRate == 5 %}
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      {% endif %}
+      <span style="font-family:Times New Roman;color:dark-grey;font-weight:bold">{{n.averageRate}}</span>
+    </p>
+
+
+
+    <!-- Collapse buttons -->
+<div>
+
+  <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    See details
+  </a>
+</div>
+<!-- / Collapse buttons -->
+
+<!-- Collapsible element -->
+<div class="collapse" id="collapseExample">
+  <div class="mt-3"><center>
+    <p style="font-family:Times New Roman;color:dark-grey;font-weight:bold;">
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {{n.count1}}</p>
+    <p style="font-family:Times New Roman;color:dark-grey;font-weight:bold">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {{n.count2}}</p>
+    <p style="font-family:Times New Roman;color:dark-grey;font-weight:bold">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      <i class="far fa-star"></i>
+      {{n.count3}}</p>
+    <p style="font-family:Times New Roman;color:dark-grey;font-weight:bold">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="far fa-star"></i>
+      {{n.count4}}</p>
+    <p style="font-family:Times New Roman;color:dark-grey;font-weight:bold">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      {{n.count5}}</p></center>
+  </div>
+</div>
+<!-- / Collapsible element -->
+
+
+
+    <!-- Text -->
+
+    <p class="card-text" style="color:grey;font-weight:bold;text-align:justify">{{n.description |truncatewords:19}}
+      </p>
+  <p style="font-family:Times New Roman;color:dark-grey;font-weight:bold">{{n.countRate}} comment(s)</p>
+    <!-- Button -->
+    <center><a href="{% url 'details' n.id %}" class="btn peach-gradient" style="color:brown;font-weight:bold;font-family:Times New Roman;border-radius:10px">Read More</a></center>
+
+  </div>
+
+</div>
+<!-- Card -->
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+
+  </div>
+
+
+
+
+
+<!--MAIN-->
+
+{% endblock %}
