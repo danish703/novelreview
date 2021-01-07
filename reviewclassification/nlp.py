@@ -8,12 +8,20 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from  django.conf import settings
 from pathlib import Path
+def polaritycheck(x):
+    if x>0 and x<=0.5:
+        return 0
+    elif x>0.5:
+        return 1
+    else:
+        return -1
+
 def dataprepartion():
     data = pd.read_csv(Path.joinpath(settings.DATASET_LOCATION,'data.csv'), encoding="ISO-8859-1")
     #data = pd.read_csv('data.csv', encoding="ISO-8859-1")
     data = data.drop('Status', axis=1)
     data['Polarity'] = data['Review'].apply(lambda x: TextBlob(x).sentiment.polarity)
-    data['pol_cat'] = data['Polarity'].apply(lambda x: 1 if x > 0 else -1)
+    data['pol_cat'] = data['Polarity'].apply(polaritycheck)
     data['Review'] = data['Review'].str.lower().str.strip()
     return data
 
@@ -39,8 +47,4 @@ def commentPredict(line):
     lr = LogisticRegression()
     lr.fit(tf_train, Y_train)
     c = vect.transform([remove_stopwords(line)])
-    return lr.predict(c)[0]
-    return lr
-
-
-
+    return [lr.predict(c)[0],TextBlob(line).sentiment.polarity]

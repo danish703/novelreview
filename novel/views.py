@@ -35,10 +35,11 @@ def details(request,id):
                 data.user = request.user
                 data.novel_id = id
                 x = commentPredict(request.POST['comment_message'])
-                if x==1:
+                if x[0]==1:
                     data.status = 'positive'
                 else:
                     data.status = 'negative'
+                data.percentage = x[1]*100;
                 data.save()
                 messages.add_message(request,messages.SUCCESS,"Successfully Commented")
                 return redirect('details',id)

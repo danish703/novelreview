@@ -11,6 +11,7 @@ class Comment(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     rating = models.PositiveIntegerField(validators=[MaxValueValidator(5),MinValueValidator(1)])
     status = models.CharField(choices=CHOICES, max_length=20, default='positive')
+    percentage = models.FloatField(default=0.0)
 
     class Meta:
         unique_together=('novel','user')
